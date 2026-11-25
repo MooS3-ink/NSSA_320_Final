@@ -53,12 +53,12 @@ variable "client_private_ip" {
 
 variable "monitor_vm_size" {
   type    = string
-  default = "Standard_D2ls_v5"
+  default = "Standard_B2s"
 }
 
 variable "client_vm_size" {
   type    = string
-  default = "Standard_D2ls_v5"
+  default = "Standard_B1ms"
 }
 
 variable "monitor_disk_size" {
