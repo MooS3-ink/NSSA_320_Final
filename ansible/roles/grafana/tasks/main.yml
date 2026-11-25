@@ -1,0 +1,83 @@
+---
+- name: Create APT keyring directory
+  ansible.builtin.file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: "0755"
+
+- name: Download Grafana repository signing key
+  ansible.builtin.get_url:
+    url: https://apt.grafana.com/gpg-full.key
+    dest: /etc/apt/keyrings/grafana.asc
+    mode: "0644"
+
+- name: Configure Grafana APT repository
+  ansible.builtin.apt_repository:
+    repo: "deb [signed-by=/etc/apt/keyrings/grafana.asc] https://apt.grafana.com stable main"
+    filename: grafana
+    state: present
+    update_cache: true
+
+- name: Install Grafana
+  ansible.builtin.apt:
+    name: grafana
+    state: present
+
+- name: Configure Grafana listening address
+  community.general.ini_file:
+    path: /etc/grafana/grafana.ini
+    section: server
+    option: http_addr
+    value: "127.0.0.1"
+    mode: "0640"
+  notify: Restart Grafana
+
+- name: Disable anonymous access
+  community.general.ini_file:
+    path: /etc/grafana/grafana.ini
+    section: auth.anonymous
+    option: enabled
+    value: "false"
+    mode: "0640"
+  notify: Restart Grafana
+
+- name: Provision Prometheus data source
+  ansible.builtin.template:
+    src: datasource.yml.j2
+    dest: /etc/grafana/provisioning/datasources/prometheus.yml
+    owner: root
+    group: grafana
+    mode: "0640"
+  notify: Restart Grafana
+
+- name: Create dashboard directory
+  ansible.builtin.file:
+    path: /var/lib/grafana/dashboards
+    state: directory
+    owner: grafana
+    group: grafana
+    mode: "0755"
+
+- name: Configure dashboard provisioning
+  ansible.builtin.copy:
+    src: dashboards.yml
+    dest: /etc/grafana/provisioning/dashboards/nssa320.yml
+    owner: root
+    group: grafana
+    mode: "0640"
+  notify: Restart Grafana
+
+- name: Deploy system monitoring dashboard
+  ansible.builtin.copy:
+    src: system-monitoring.json
+    dest: /var/lib/grafana/dashboards/system-monitoring.json
+    owner: grafana
+    group: grafana
+    mode: "0644"
+  notify: Restart Grafana
+
+- name: Enable and start Grafana
+  ansible.builtin.systemd:
+    name: grafana-server
+    enabled: true
+    state: started

@@ -1,0 +1,48 @@
+---
+- name: Install Prometheus
+  ansible.builtin.apt:
+    name: prometheus
+    state: present
+
+- name: Create alert rules directory
+  ansible.builtin.file:
+    path: /etc/prometheus/rules
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: Deploy Prometheus alert rules
+  ansible.builtin.template:
+    src: alerts.yml.j2
+    dest: /etc/prometheus/rules/alerts.yml
+    owner: root
+    group: root
+    mode: "0644"
+    validate: "promtool check rules %s"
+  notify: Restart Prometheus
+
+- name: Deploy Prometheus configuration
+  ansible.builtin.template:
+    src: prometheus.yml.j2
+    dest: /etc/prometheus/prometheus.yml
+    owner: root
+    group: root
+    mode: "0644"
+    validate: "promtool check config %s"
+  notify: Restart Prometheus
+
+- name: Configure Prometheus startup arguments
+  ansible.builtin.template:
+    src: prometheus-default.j2
+    dest: /etc/default/prometheus
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Restart Prometheus
+
+- name: Enable and start Prometheus
+  ansible.builtin.systemd:
+    name: prometheus
+    enabled: true
+    state: started
