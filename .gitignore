@@ -1,0 +1,27 @@
+# Terraform
+**/.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfvars.json
+*.tfplan
+backend.hcl
+crash.log
+
+# Ansible
+*.retry
+*.log
+ansible/inventory/generated.ini
+.vault_pass
+
+# Credentials
+.env
+*.pem
+*.key
+id_rsa*
+id_ed25519*
+nssa320_g3
+
+# Python
+__pycache__/
+.venv/
