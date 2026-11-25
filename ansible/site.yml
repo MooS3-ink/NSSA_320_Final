@@ -1,0 +1,14 @@
+---
+- name: Configure baseline on all Azure hosts
+  hosts: all
+  become: true
+  roles:
+    - common
+    - node_exporter
+
+- name: Configure monitoring server
+  hosts: monitor
+  become: true
+  roles:
+    - prometheus
+    - grafana

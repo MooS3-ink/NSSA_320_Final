@@ -1,0 +1,17 @@
+---
+monitor_private_ip: "10.30.1.10"
+client_private_ip: "10.30.1.20"
+
+node_exporter_port: 9100
+prometheus_port: 9090
+grafana_port: 3000
+
+prometheus_scrape_interval: "15s"
+prometheus_evaluation_interval: "15s"
+prometheus_alert_duration: "1m"
+prometheus_retention: "7d"
+
+allowed_admin_cidrs:
+  - "129.21.183.61/32"
+
+node_exporter_service: prometheus-node-exporter

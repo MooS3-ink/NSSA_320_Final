@@ -1,0 +1,11 @@
+groups:
+  - name: node_availability
+    rules:
+      - alert: NodeExporterDown
+        expr: up{job="node"} == 0
+        for: {{ prometheus_alert_duration }}
+        labels:
+          severity: critical
+        annotations:
+          summary: "{% raw %}Node Exporter is down on {{ $labels.instance }}{% endraw %}"
+          description: "Node Exporter has been unreachable for at least one minute."
