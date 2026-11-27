@@ -1,0 +1,11 @@
+Name               ResourceGroup    Location     Type                                     Status
+-----------------  ---------------  -----------  ---------------------------------------  ---------
+g3-vnet            rg-nssa320-g3    denmarkeast  Microsoft.Network/virtualNetworks        Succeeded
+g3-nsg             rg-nssa320-g3    denmarkeast  Microsoft.Network/networkSecurityGroups  Succeeded
+g3-monitor-pip     rg-nssa320-g3    denmarkeast  Microsoft.Network/publicIPAddresses      Succeeded
+g3-monitor-nic     rg-nssa320-g3    denmarkeast  Microsoft.Network/networkInterfaces      Succeeded
+g3-client-nic      rg-nssa320-g3    denmarkeast  Microsoft.Network/networkInterfaces      Succeeded
+g3-monitor         rg-nssa320-g3    denmarkeast  Microsoft.Compute/virtualMachines        Succeeded
+g3-client          rg-nssa320-g3    denmarkeast  Microsoft.Compute/virtualMachines        Succeeded
+g3-monitor-osdisk  RG-NSSA320-G3    denmarkeast  Microsoft.Compute/disks                  Succeeded
+g3-client-osdisk   RG-NSSA320-G3    denmarkeast  Microsoft.Compute/disks                  Succeeded
