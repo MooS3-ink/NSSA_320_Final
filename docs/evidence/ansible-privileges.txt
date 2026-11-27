@@ -1,0 +1,4 @@
+g3-monitor | CHANGED | rc=0 >>
+root
+g3-client | CHANGED | rc=0 >>
+root

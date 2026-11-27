@@ -1,0 +1,26 @@
+
+PLAY [Recover Node Exporter on client] *****************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [g3-client]
+
+TASK [Ensure Node Exporter is running] *****************************************
+changed: [g3-client]
+
+PLAY [Verify recovered client from monitor] ************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [g3-monitor]
+
+TASK [Verify client metrics endpoint] ******************************************
+ok: [g3-monitor]
+
+TASK [Confirm recovery] ********************************************************
+ok: [g3-monitor] => {
+    "msg": "Client Node Exporter is reachable from the monitoring server."
+}
+
+PLAY RECAP *********************************************************************
+g3-client                  : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+g3-monitor                 : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

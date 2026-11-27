@@ -1,0 +1,126 @@
+
+PLAY [Configure baseline on all Azure hosts] ***********************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [g3-monitor]
+ok: [g3-client]
+
+TASK [common : Install common system packages] *********************************
+ok: [g3-monitor]
+ok: [g3-client]
+
+TASK [common : Allow authorized SSH access to monitor] *************************
+skipping: [g3-client] => (item=129.21.183.61/32) 
+skipping: [g3-client]
+changed: [g3-monitor] => (item=129.21.183.61/32)
+
+TASK [common : Allow SSH from monitor to client] *******************************
+skipping: [g3-monitor]
+changed: [g3-client]
+
+TASK [common : Allow Grafana from authorized networks] *************************
+skipping: [g3-client] => (item=129.21.183.61/32) 
+skipping: [g3-client]
+changed: [g3-monitor] => (item=129.21.183.61/32)
+
+TASK [common : Allow Prometheus to scrape client metrics] **********************
+skipping: [g3-monitor]
+changed: [g3-client]
+
+TASK [common : Allow outbound traffic] *****************************************
+ok: [g3-monitor]
+ok: [g3-client]
+
+TASK [common : Deny unauthorized incoming traffic] *****************************
+ok: [g3-monitor]
+ok: [g3-client]
+
+TASK [common : Enable UFW firewall] ********************************************
+changed: [g3-monitor]
+changed: [g3-client]
+
+TASK [node_exporter : Install Node Exporter] ***********************************
+changed: [g3-monitor]
+changed: [g3-client]
+
+TASK [node_exporter : Configure Node Exporter listening address] ***************
+changed: [g3-monitor]
+changed: [g3-client]
+
+TASK [node_exporter : Enable and start Node Exporter] **************************
+ok: [g3-monitor]
+ok: [g3-client]
+
+RUNNING HANDLER [node_exporter : Restart Node Exporter] ************************
+changed: [g3-monitor]
+changed: [g3-client]
+
+PLAY [Configure monitoring server] *********************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [g3-monitor]
+
+TASK [prometheus : Install Prometheus] *****************************************
+changed: [g3-monitor]
+
+TASK [prometheus : Create alert rules directory] *******************************
+changed: [g3-monitor]
+
+TASK [prometheus : Deploy Prometheus alert rules] ******************************
+changed: [g3-monitor]
+
+TASK [prometheus : Deploy Prometheus configuration] ****************************
+changed: [g3-monitor]
+
+TASK [prometheus : Configure Prometheus startup arguments] *********************
+changed: [g3-monitor]
+
+TASK [prometheus : Enable and start Prometheus] ********************************
+ok: [g3-monitor]
+
+TASK [grafana : Create APT keyring directory] **********************************
+ok: [g3-monitor]
+
+TASK [grafana : Download Grafana repository signing key] ***********************
+[WARNING]: Module remote_tmp /root/.ansible/tmp did not exist and was created
+with a mode of 0700, this may cause issues when running as another user. To
+avoid this, create the remote_tmp dir with the correct permissions manually
+changed: [g3-monitor]
+
+TASK [grafana : Configure Grafana APT repository] ******************************
+changed: [g3-monitor]
+
+TASK [grafana : Install Grafana] ***********************************************
+changed: [g3-monitor]
+
+TASK [grafana : Configure Grafana listening address] ***************************
+changed: [g3-monitor]
+
+TASK [grafana : Disable anonymous access] **************************************
+changed: [g3-monitor]
+
+TASK [grafana : Provision Prometheus data source] ******************************
+changed: [g3-monitor]
+
+TASK [grafana : Create dashboard directory] ************************************
+changed: [g3-monitor]
+
+TASK [grafana : Configure dashboard provisioning] ******************************
+changed: [g3-monitor]
+
+TASK [grafana : Deploy system monitoring dashboard] ****************************
+changed: [g3-monitor]
+
+TASK [grafana : Enable and start Grafana] **************************************
+changed: [g3-monitor]
+
+RUNNING HANDLER [prometheus : Restart Prometheus] ******************************
+changed: [g3-monitor]
+
+RUNNING HANDLER [grafana : Restart Grafana] ************************************
+changed: [g3-monitor]
+
+PLAY RECAP *********************************************************************
+g3-client                  : ok=11   changed=6    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
+g3-monitor                 : ok=31   changed=23   unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
+

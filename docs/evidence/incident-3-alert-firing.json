@@ -1,0 +1,22 @@
+{
+    "status": "success",
+    "data": {
+        "alerts": [
+            {
+                "labels": {
+                    "alertname": "NodeExporterDown",
+                    "instance": "g3-client",
+                    "job": "node",
+                    "severity": "critical"
+                },
+                "annotations": {
+                    "description": "Node Exporter has been unreachable for at least one minute.",
+                    "summary": "Node Exporter is down on g3-client"
+                },
+                "state": "firing",
+                "activeAt": "2026-11-27T01:30:37.8474399Z",
+                "value": "0e+00"
+            }
+        ]
+    }
+}

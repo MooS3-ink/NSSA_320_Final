@@ -1,0 +1,19 @@
+NSSA320 Group 3 health check - 2026-11-27T00:35:23Z
+Monitor: g3-monitor   Client: g3-client
+
+[PASS] SSH reachable: g3-monitor
+[PASS] SSH reachable: g3-client
+[PASS] g3-monitor: prometheus is active
+[PASS] g3-monitor: prometheus-node-exporter is active
+[PASS] g3-monitor: grafana-server is active
+[PASS] g3-client: prometheus-node-exporter is active
+[PASS] Prometheus /-/healthy responded
+[PASS] Grafana /api/health database=ok
+[PASS] Target up: job=node instance=g3-monitor
+[PASS] Target up: job=node instance=g3-client
+[PASS] Target up: job=prometheus instance=127.0.0.1:9090
+[PASS] Target count: 3 (expected 3)
+[PASS] Alert rule NodeExporterDown loaded (health=ok)
+[PASS] Alert NodeExporterDown is inactive
+
+RESULT: HEALTHY - all checks passed
