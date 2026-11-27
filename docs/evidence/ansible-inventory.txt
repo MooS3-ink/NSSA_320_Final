@@ -1,0 +1,6 @@
+@all:
+  |--@ungrouped:
+  |--@monitor:
+  |  |--g3-monitor
+  |--@client:
+  |  |--g3-client
