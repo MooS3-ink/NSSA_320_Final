@@ -1,0 +1,10 @@
+azurerm_linux_virtual_machine.vm["client"]
+azurerm_linux_virtual_machine.vm["monitor"]
+azurerm_network_interface.vm["client"]
+azurerm_network_interface.vm["monitor"]
+azurerm_network_security_group.project
+azurerm_public_ip.monitor
+azurerm_resource_group.project
+azurerm_subnet.project
+azurerm_subnet_network_security_group_association.project
+azurerm_virtual_network.project

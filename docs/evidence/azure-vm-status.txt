@@ -1,0 +1,4 @@
+Name        ResourceGroup    PowerState    PublicIps     Fqdns    Location
+----------  ---------------  ------------  ------------  -------  -----------
+g3-client   rg-nssa320-g3    VM running                           denmarkeast
+g3-monitor  rg-nssa320-g3    VM running    9.205.93.105           denmarkeast
