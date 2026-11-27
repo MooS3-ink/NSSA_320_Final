@@ -103,13 +103,15 @@ Timings are measured by polling every 5 seconds and are therefore accurate to wi
 To recover manually, run ***ansible-playbook recovery.yml*** from ***ansible/***, or run ***ssh g3-client 'sudo systemctl start prometheus-node-exporter'***.
 
 ## Cost estimates
-
-The platform was deployed in Denmark East using ***Standard_B2s*** (monitor) and ***Standard_B1ms*** (client), but Azure does not publish a public price for these sizes in that region. The estimates below start from the published East US pay-as-you-go Linux rates and apply a 19.8% markup, which is the average difference observed between the Denmark and East US prices of the B-series sizes compared.
-
-| VM | East US (per hour) | Denmark East, estimated (per hour) | Denmark East, estimated (per month) |
+ 
+The platform was deployed in Denmark East using ***Standard_B2s*** (monitor) and ***Standard_B1ms*** (client), but Azure does not publish a public price for these sizes in that region. The estimates below start from the published East US pay-as-you-go Linux rates and apply a 19.8% markup, which is the average difference observed between the Denmark and East US prices of the B-series sizes compared. Costs are shown per hour, with a total for the 80 powered-on hours planned for each VM.
+ 
+| Item | East US (per hour) | Denmark East, estimated (per hour) | 80 hours |
 | --- | --- | --- | --- |
-| ***Standard_B2s*** (monitor) | $0.0416 | $0.0498 | $36.38 |
-| ***Standard_B1ms*** (client) | $0.0207 | $0.0248 | $18.10 |
-| Total | $0.0623 | $0.0746 | $54.48 |
-
-Monthly figures assume both VMs run continuously for 730 hours. Disks, the public IP address and network egress are not included and add a small amount. VMs that are deallocated outside of testing and demonstration sessions only incur disk costs while stopped, so actual spend is expected to be well below the monthly estimate.
+| Monitor compute (***Standard_B2s***) | $0.0416 | $0.0498 | $3.99 |
+| Client compute (***Standard_B1ms***) | $0.0207 | $0.0248 | $1.98 |
+| Two OS disks | | $0.0137 | $1.10 |
+| One public IP | | $0.0068 | $0.55 |
+| Total | | $0.0952 | $7.61 |
+ 
+The disk and public IP rates are planning allowances carried over from the proposal and do not include the Denmark markup. Taxes, network egress and storage account usage are not included.
