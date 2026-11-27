@@ -1,0 +1,18 @@
+
+ssh g3-monitor 'systemctl is-active prometheus prometheus-node-exporter grafana-server'
+active
+active
+active
+ssh g3-client 'systemctl is-active prometheus-node-exporter'
+active
+ssh g3-monitor 'curl -fsS http://127.0.0.1:9090/-/healthy'
+Prometheus is Healthy.
+ssh g3-monitor 'curl -fsS http://127.0.0.1:3000/api/health'
+{
+  "database": "ok",
+  "version": "13.3.2",
+  "commit": "bd754986872f554d30a147ebd605a7fe15881a28"
+}ssh g3-monitor 'curl -fsS http://127.0.0.1:9090/api/v1/targets' | python3 -c 'import json,sys; d=json.load(sys.stdin); [print(t[labels][instance],t[health]) for t in d[data][activeTargets]]'
+g3-monitor up
+g3-client up
+127.0.0.1:9090 up
